@@ -1,0 +1,60 @@
+.navbar {
+	background-color: #38414a;
+	box-shadow: 0 0 35px 0 rgba(66, 72, 80, .15);
+    height: 70px;
+    position: relative;
+
+	.logo-box {
+        position: absolute;
+        top: 0;
+        left: 0;
+		width: 240px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+		img {
+			height: 22px;
+			object-fit: cover;
+		}
+	}
+
+	.topnav {
+        height: 100%;
+        margin-left: 240px;
+        padding-right: 10px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: #fff;
+
+		.menu {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+
+			li {
+				padding: 0 10px;
+			}
+		}
+
+		.icon-btn {
+			cursor: pointer;
+			font-size: 1.6rem;
+		}
+
+		.profile {
+			cursor: pointer;
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			overflow: hidden;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}
