@@ -10,8 +10,35 @@ const SideMenu = () => {
 
   const location = useLocation();
   useEffect(() => {
-    const { pathname } = location;
+    const handleActive = (menu) => {
+      const list = menus.map((m) => {
+        if (m.name === menu.name) {
+          return { ...menu, active: true };
+        }
 
+        if (m.children) {
+          const { children } = m;
+          m.active = false;
+          m.open = false;
+          children.forEach((child) => {
+            if (menu.name === child.name) {
+              child.active = true;
+              m.active = true;
+              m.open = true;
+            } else {
+              child.active = false;
+            }
+          });
+
+          return { ...m };
+        }
+
+        return { ...m, active: false };
+      });
+      setMenus(list);
+    };
+
+    const { pathname } = location;
     menuList.some((m) => {
       if (pathname === m.url) {
         handleActive({ ...m });
@@ -29,7 +56,8 @@ const SideMenu = () => {
 
       return false;
     });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   const handleToggle = (menu) => {
     const list = menus.map((m) => {
@@ -38,34 +66,6 @@ const SideMenu = () => {
       }
 
       return { ...m, open: false };
-    });
-    setMenus(list);
-  };
-
-  const handleActive = (menu) => {
-    const list = menus.map((m) => {
-      if (m.name === menu.name) {
-        return { ...menu, active: true };
-      }
-
-      if (m.children) {
-        const { children } = m;
-        m.active = false;
-        m.open = false;
-        children.forEach((child) => {
-          if (menu.name === child.name) {
-            child.active = true;
-            m.active = true;
-            m.open = true;
-          } else {
-            child.active = false;
-          }
-        });
-
-        return { ...m };
-      }
-
-      return { ...m, active: false };
     });
     setMenus(list);
   };
@@ -81,13 +81,10 @@ const SideMenu = () => {
                   key={index}
                   menu={menu}
                   toggleClick={handleToggle}
-                  activeClick={handleActive}
                 />
               );
             }
-            return (
-              <MenuLink key={index} menu={menu} activeClick={handleActive} />
-            );
+            return <MenuLink key={index} menu={menu} />;
           })}
       </ul>
     </div>

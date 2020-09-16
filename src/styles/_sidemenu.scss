@@ -15,7 +15,6 @@
       display: block;
       padding: 12px 20px;
       position: relative;
-      transition: all 0.4s;
       font-family: "Cerebri Sans,sans-serif";
       font-size: 0.95rem;
 
@@ -26,13 +25,18 @@
       }
 
       .arrow {
-        display: inline-block;
+        // display: none;
         position: absolute;
         top: 15px;
         right: 20px;
-        transition: transform 0.15s;
-        transform: translate(0, 0);
+        // transform: rotate(0);
       }
+
+      // &.open {
+      //   .arrow {
+      //     transform: rotate(90deg);
+      //   }
+      // }
 
       &:active,
       &:focus,
@@ -48,8 +52,6 @@
 
     ul {
       padding-left: 34px;
-      display: none;
-      transition: all 0.5s ease-out;
 
       .sub-link {
         cursor: pointer;
@@ -57,7 +59,6 @@
         color: #6e768e;
         display: block;
         position: relative;
-        transition: all 0.4s;
         font-size: 0.875rem;
 
         &:hover,
@@ -66,15 +67,40 @@
         }
       }
     }
-
-    &.open {
-      .arrow {
-        transform: rotate(90deg);
-      }
-
-      ul {
-        display: block;
-      }
-    }
   }
+}
+
+// fade
+.my-fade-enter {
+  opacity: 1;
+}
+.my-fade-enter-done {
+  transform: rotate(90deg) ;
+  opacity: 1;
+  transition: transform 1000ms, opacity 1000ms;
+}
+.my-fade-exit-done {
+  transform: rotate(0) ;
+  opacity: 1;
+  transition: transform 1000ms, opacity 1000ms;
+}
+// .my-fade-exit-done {
+//   transform: rotate(90deg) ;
+//   opacity: 1;
+//   transition: transform 1000ms, opacity 1000ms;
+// }
+
+
+.submenu-enter {
+  display: none;
+}
+.submenu-enter-done {
+  display: block;
+}
+
+.arrow-enter {
+  transform: rotate(0) ;
+}
+.arrow-enter-done {
+  transform: rotate(90deg) ;
 }
